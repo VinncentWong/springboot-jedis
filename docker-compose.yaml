@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+  java:
+    image: javatesti:latest
+    ports:
+      "8000:8000"
+    depends_on:
+      - redis
+volumes:
+  redisVolume:
