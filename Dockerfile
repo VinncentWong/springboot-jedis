@@ -6,4 +6,4 @@ COPY . .
 
 RUN ./mvnw dependency:go-offline
 EXPOSE 8000
-CMD ["mvnw", "springboot:run"]
+CMD ["./mvnw", "springboot:run"]
