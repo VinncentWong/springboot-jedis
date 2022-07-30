@@ -1,6 +1,5 @@
 package com.demo.service;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -44,7 +43,7 @@ public class ProductService{
 		dummyObject.add(product5);
 	}
 	
-	@Cacheable("product")
+	@Cacheable(value = "product")
 	public ArrayList<Product> getProduct(){
 		System.out.println("Calling get Product");
 		try{Thread.sleep(5000);}catch(InterruptedException ex) {ex.printStackTrace();}
@@ -54,8 +53,8 @@ public class ProductService{
 	@CacheEvict(value = "product", allEntries = true)
 	public ArrayList<Product> addProduct(Product product){
 		dummyObject.add(product);
-		// When add product, the cache is still not updated. We can tell the cache to update
-		// The old catch will be evicted and the new cache("product") will be get a new cache when call getProduct() again
+		// When add product, the cache is still not updated. We can tell old cache to remove itself when a product is added
+		// The old cache will be evicted and the new cache("product") will be get a new cache when call getProduct() again
 		return dummyObject;
 	}
 }
