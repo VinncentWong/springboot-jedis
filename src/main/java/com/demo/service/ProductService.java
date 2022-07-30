@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,14 @@ public class ProductService{
 	public ArrayList<Product> getProduct(){
 		System.out.println("Calling get Product");
 		try{Thread.sleep(5000);}catch(InterruptedException ex) {ex.printStackTrace();}
+		return dummyObject;
+	}
+	
+	@CacheEvict(value = "product", allEntries = true)
+	public ArrayList<Product> addProduct(Product product){
+		dummyObject.add(product);
+		// When add product, the cache is still not updated. We can tell the cache to update
+		// The old catch will be evicted and the new cache("product") will be get a new cache when call getProduct() again
 		return dummyObject;
 	}
 }
