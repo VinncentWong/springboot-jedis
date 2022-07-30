@@ -5,12 +5,13 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - redisVolume
-  java:
-    image: javatesti:latest
-    ports:
-      - "8000:8000"
-    depends_on:
-      - redis
+      - "./redis:/data"
+#  java:
+#    image: javatesti:latest
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - redis
 volumes:
   redisVolume:
+    
