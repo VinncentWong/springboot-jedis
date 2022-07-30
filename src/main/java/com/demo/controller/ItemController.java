@@ -20,18 +20,18 @@ public class ItemController {
 		this.productService = productService;
 	}
     
-    @GetMapping("/")
-    public String helloWorld() {
-    	return "Hello World";
-    }
+	@GetMapping("/")
+	public String helloWorld() {
+		return "Hello World";
+	}
 
-    @GetMapping("/home")
-    public String helloWorld2() {
-    	return "Hello Home";
-    }
-    
-    @GetMapping("/getproduct")
-    public ArrayList<Product> getProduct(){
-    	return productService.getProduct();
-    }
+	@GetMapping("/home")
+	public String helloWorld2() {
+		return "Hello Home";
+	}
+
+	@GetMapping("/getproduct")
+	public ArrayList<Product> getProduct(){
+		return productService.getProduct();
+	}
 }
