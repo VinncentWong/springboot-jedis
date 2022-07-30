@@ -11,15 +11,15 @@ import lombok.Data;
 @RedisHash("Product")
 public class Product implements Serializable{
     
-    /**
+    	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7662389562377520228L;
 
 	@Id
-    private Long id;
+    	private Long id;
 
-    private String name;
+    	private String name;
 
-    private Integer price;
+    	private Integer price;
 }
