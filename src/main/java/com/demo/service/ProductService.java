@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.demo.entities.Product;
 import com.demo.repository.ProductRepository;
 
+@Transactional
 @Service
 public class ProductService{
 //	ArrayList<Product> dummyObject = new ArrayList<>();
