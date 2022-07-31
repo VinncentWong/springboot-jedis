@@ -3,12 +3,10 @@ package com.demo.entities;
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
 
 import lombok.Data;
 
 @Data
-@RedisHash("Product")
 public class Product implements Serializable{
     
     /**
