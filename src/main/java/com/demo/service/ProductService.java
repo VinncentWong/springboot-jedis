@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Product;
@@ -46,10 +47,12 @@ public class ProductService{
 //	}
 	
 	private final ProductRepository repo;
+	private final RedisTemplate<String, Object> redisTemplate;
 	
 	@Autowired
-	public ProductService(ProductRepository repo) {
+	public ProductService(ProductRepository repo, RedisTemplate<String,Object> redisTemplate) {
 		this.repo = repo;
+		this.redisTemplate = redisTemplate;
 	}
 	
 	@Cacheable(value = "product")
@@ -62,6 +65,8 @@ public class ProductService{
 	@CacheEvict(value = "product", allEntries = true)
 	public Product addProduct(Product product){
 		var result = repo.save(product);
+		redisTemplate.opsForValue().set("product", product);
+		// Use opsForValue to get value operation -> method to perform operation to redis
 		// When add product, the cache is still not updated. We can tell old cache to remove itself when a product is added
 		// The old cache will be evicted and the new cache("product") will be get a new cache when call getProduct() again
 		return result;
